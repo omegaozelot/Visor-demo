@@ -1,0 +1,187 @@
+.container { 
+
+  position: absolute; margin: 0; width:100%; background: #f4f5f4; min-height: 1800px; 
+
+}
+
+.wbox { width: 610px; margin-left: auto; margin-right: auto; height: 100%;  
+  
+  animation: colorShift 15s infinite;
+  padding: 40px;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: all .5s ease-in-out;
+  position: absolute;
+  left: 0;
+
+}
+
+.wbox#regisbox { left: -610px; transition: all .5s ease-in-out; padding-top: 65px }
+
+h2 { font-family: "Trebuchet MS", sans-serif; font-weight: bold; }
+
+label { 
+  font-family: "Helvetica", sans-serif; 
+  font-weight: bold;
+  font-size: 120%;
+  color: black;
+}
+
+.loginbox {
+
+  padding-left: 50px;
+
+}
+
+input[type=text], input[type=password], input[type=email] {
+
+  background: black;
+  padding: 5px 9px 5px 9px;
+  font-weight: bold;
+  color: white;
+  width: 90%;
+  border-width: 2px;
+  border-color: black;
+
+}
+
+input:focus { border-color: #8181e3; }
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+input[type=submit] {
+  width: 90%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Helvetica", sans-serif;
+  font-weight: bold;
+}
+
+input[type=submit]:hover { background-color: #45a049; }
+
+input[type=submit].end { background-color: #AF4C4C; margin-top: -5px }
+
+input[type=submit].end:hover { background-color: #A04545; }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  font-family: "Roboto Medium", sans-serif;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes colorShift {
+  0% {
+    background: #B0A3D4;
+  }
+  25% {
+    background: #CEBACF;
+  }
+  50% {
+    background: #C6AFB1;
+  }
+  75% {
+    background: #CEBACF;
+  }
+  100% {
+    background: #B0A3D4;
+  }
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  animation: colorShift 15s infinite;
+}
+
+.bg {
+
+  /* The image used */
+  /* background-image: url("../images/AC2.jpg"); */
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  margin: 0;
+
+}
+
+.logo {
+
+  max-width: 500px;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+}
+
+img.logo {
+
+  margin-top: -30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+}
+
+object.logo {
+
+  position: absolute;
+  text-align: right;
+  z-index: 1;
+  top: 75px;
+  right: -55px;
+  max-width: 280px;
+
+}

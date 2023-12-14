@@ -1,0 +1,42 @@
+html
+	include head.pug
+	body
+		.bg(style="background-image: url('../images/AC2.png');")
+			.wbox#initloginbox
+				img.logo(src="../images/logoskel.svg")
+				object.logo(data="../images/spinny.svg")
+				br
+				.loginbox
+					h2 Log-in 🔒
+					br
+					input#uname(type='text' name='uname' placeholder='Username')
+					br
+					br
+					input#passw(type='password' name='passw' placeholder='Password')
+					br
+					br
+					input#enter(type='submit' value='Enter')
+					br
+					br
+					input.end#regis(type='submit' value='New User?')
+			.wbox#regisbox
+				img.logo(src="../images/logoskel.svg")
+				object.logo(data="../images/spinny.svg")
+				br
+				.loginbox
+					h2 Sign up 🖊️
+					br
+					input#newemail(type='email' name='email' placeholder='Email address')
+					br
+					br
+					input#newuname(type='text' name='uname' placeholder='Username')
+					br
+					br
+					input#newpassw(type='password' name='passw' placeholder='Password')
+					br
+					br
+					input#regisenter(type='submit' value='Continue')
+					br
+					br
+					input.end#goback(type='submit' value='Go Back')
+			script(src='../js/homepage.js')

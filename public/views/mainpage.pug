@@ -1,0 +1,143 @@
+doctype html
+head
+  title Visor
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+  link(rel='stylesheet' href='assets/css/main.css')
+  link(rel='stylesheet' href='assets/css/modal.css')
+  link(rel='stylesheet' href='assets/css/visor.css')
+  noscript
+    link(rel='stylesheet' href='assets/css/noscript.css')
+// Curtain
+.curtain#curtain
+  h1#question
+    | Uploading file...
+  object.spinner(type="image/svg+xml" data="images/visoranimated.svg")
+// Page Wrapper
+#page-wrapper.glowwall
+  // Wrapper
+  #wrapper
+    // Panel (Upload)
+    section.panel.banner.left
+      .image#placeholderbillboard.span-1-75(data-position='25% 25%', style='background-color: white')
+        label.drop-container#dropcontainer(for="upload-button")
+          span.drop-title Drop files here
+          | or
+          input#upload-button(type="file", accept="video/mp4,video/x-m4v,video/*", name='upload', hidden)
+          label#upload-label(for="upload-button")
+          | or
+          input#ytinput(type='text' name='yturl' placeholder='Insert YouTube URL')
+    // Panel (Spotlight)
+    section.panel.banner.left
+      .intro.blackwall.span-4-5#tvwall
+        .logo
+          h2.major.majorlong#headertext VISOR
+          .spinner#logo
+            object.logo(type="image/svg+xml" data="images/visoranimated.svg")
+        p#tv(style="margin-top: 7px")
+          | A video analytics project
+    // Summary
+    section.panel.banner.left.dashboard(style='display: none')
+      .span-4-5.scroller
+        // Summary
+        .intro.span-4-5.dash(style='background-color: #E0483D')
+          h2.major GPT-3 summary
+        .intro.span-4-5.note.blank
+          p#summarytext Summary text
+        // Speech analysis
+        .intro.span-4-5.dash(style='background-color: #FC903D')
+          h2.major Speech analysis
+        .intro.span-4-5.note2.blank
+          #waveform
+          ul(style='margin-top:40px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') Quality
+              p#emotion
+                u Processing...
+        // NLP
+        .intro.span-4-5.dash(style='background-color: #1D1E33')
+          h2.major Text analysis
+        .intro.span4-5.note2.blank
+          ul(style='margin-top:0px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') Opening sentences
+              p#nlp1
+                u Processing...
+            li
+              span(style='font-weight: 700') Closing sentences
+              p#nlp2
+                u Processing...
+              p(style='margin-top:20px; font-weight: 700') 
+                | Lines with apt introductions and closing statements are underlined in 
+                span.green-underline green.
+        // Gaze estimation
+        .intro.span-4-5.dash(style='background-color: #2C5545')
+          h2.major Gaze estimation
+        .intro.span-4-5.note2.blank
+          ul(style='margin-top:0px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') Results
+              p#gaze
+                u Processing...
+        // Business value
+        .intro.span-4-5.dash(style='background-color: #57779A')
+          h2.major Business value
+        .intro.span-4-5.note2.blank
+          ul(style='margin-top:0px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') GPT-3
+              p#business-value-text
+                u Processing...
+        // Hume
+        .intro.span-4-5.dash(style='background-color: #C3A59F')
+          h2.major Hume
+        .intro.span-4-5.note2.blank
+          ul(style='margin-top:0px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') Voice
+              p#hume-text
+                u Processing...
+            li
+              span(style='font-weight: 700') Facial expression
+              p#hume-face
+                u Processing...
+        // Image Recognition
+        .intro.span-4-5.dash(style='background-color: #E55137')
+          h2.major Image Recognition
+        .intro.span-4-5.note2.blank
+          ul(style='margin-top:0px; margin-bottom:-20px')
+            li
+              span(style='font-weight: 700') Do the slides have images?
+              p#image-recognition-text
+                u Processing...
+        // PDF Report
+        .intro.span-4-5.dash.blackwall
+          h2.major PDF Report
+        .intro.span-4-5.note2.blank(style="height: 260px")
+          .divpart(style="float: right")
+            img#sample-pdf(width="200px", src="images/demo.png")
+          .divpart(style="float: left")
+            ul(style="margin-bottom: 40px")
+              li
+                p#pdf-loading PDF generation in progress...
+            button#pdf-button(style='display: none')
+    // Copyright
+    .copyright(style="color: black; font-weight: bold")
+      | &copy; Manfred Kho — Poh Sheng Bao — Ethan Low, 2023
+    // Modal
+    .modal#modalBox
+      .modal-content
+        .modal-header#mlhead
+          span.close &times;
+          h2#modalHeader Modal header
+        .modal-body#mlbody
+          ul.actions
+              li
+                input.primary.color2#startButton(type='button' value='Yes')
+// Scripts
+script(src='assets/js/jquery.min.js')
+script(src='assets/js/browser.min.js')
+script(src='assets/js/breakpoints.min.js')
+script(src='assets/js/main.js')
+script(src='assets/js/upload.js', type="module")
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
