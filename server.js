@@ -4,7 +4,6 @@ const path = require ('path');
 let express = require ("express");
 
 let app = express();
-const PORT = process.env.PORT || 3030;
 
 // Middleware
 app.use(express.json({limit: '50mb'}));
@@ -26,6 +25,5 @@ app.get("/", (req, res) => {
 
 routes(app);
 
-app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
-});
+app.listen(8080, "127.0.0.1");
+console.log("web server running @ http://localhost:8080");

@@ -35,11 +35,11 @@ class PDF {
             doc.moveDown(1);
         }
 
-        let summ = data.summary;
+        let summ = data.summary.replaceAll(/<[^>]*>/g, '');
         if (typeof summ === 'string' || summ instanceof String)
             summ = summ.replaceAll('\n', '');
 
-        let bidness = data.businessValue;
+        let bidness = data.businessValue.replaceAll(/<[^>]*>/g, '').replaceAll('&#39;', "'");
         if (typeof bidness === 'string' || bidness instanceof String)
             bidness = bidness.replaceAll('\n', '');
 
