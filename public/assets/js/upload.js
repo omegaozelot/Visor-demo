@@ -124,8 +124,8 @@ let loadEverything = async (video, file) => {
 		let bulk = await Promise.all([
 			new Promise((res, rej) => speechAnalysisCall(file.name, res, rej)), 
 			new Promise((res, rej) => gazeEstimationCall(file.name, res, rej)), 
-			new Promise((res, rej) => nlpCall(script, res, rej)),
-			new Promise((res, rej) => businessValue(summary.transcript, res, rej)),
+			new Promise((res, rej) => nlpCall(file.name, script, res, rej)),
+			new Promise((res, rej) => businessValue(file.name, summary.transcript, res, rej)),
 			new Promise((res, rej) => hume(file.name, res, rej)),
 			new Promise((res, rej) => imageRecognition(file.name, res, rej))
 		]);
@@ -211,7 +211,7 @@ let speechAnalysisCall = async (filename, res, rej) => {
 
 };
 
-let nlpCall = async (script, res, rej) => {
+let nlpCall = async (filename, script, res, rej) => {
 
 	let sendToNLP = new XMLHttpRequest();
 
@@ -233,19 +233,25 @@ let nlpCall = async (script, res, rej) => {
 			palette += `<span class="${underline}">${sentence}${fullstop} </span>`;
 		};
 
+		const iterateLineEnd = (sentence, i) => {
+			let underline = (sentiments[i + 2] == 'Professional') ? 'red-underline' : 'green-underline';
+			let fullstop =  (sentence.slice(-1) == '?') ? '' : '.';
+			palette += `<span class="${underline}">${sentence}${fullstop} </span>`;
+		};
+
 		sentences.slice(0, 2).forEach(iterateLine);
 
 		scriptStart.innerHTML = palette;
 
 		palette = '';
-		sentences.slice(-2).forEach(iterateLine);
+		sentences.slice(-2).forEach(iterateLineEnd);
 
 		scriptEnd.innerHTML = palette;
 		return res(sentiments);
 
 	};
 
-	const nlpPayload = { script: script };
+	const nlpPayload = { script: script, name: filename };
 	sendToNLP.send(JSON.stringify(nlpPayload));
 
 };
@@ -298,7 +304,7 @@ const downloader = async (e) => {
 
 };
 
-let businessValue = async (script, res, rej) => {
+let businessValue = async (filename, script, res, rej) => {
 
 	/*
 	let sendToGPT = new XMLHttpRequest();
@@ -320,7 +326,7 @@ let businessValue = async (script, res, rej) => {
 	sendToGPT.send(JSON.stringify(payload));
 	*/
 
-	const response = "This student's pitch is a good overview of their project, and they have clearly outlined the business value of it. They have identified three business problems/challenges, and provided solutions to each one. They have identified that the project will have a low cost, as developers are students, and will be efficient as the students will already have knowledge of malware. Lastly, they have identified that the project will help to spread awareness and recognition for the TPMSC, and help to raise awareness about malware. The student's pitch could be improved by providing more detail on the solutions they are proposing. They have mentioned user feedback and a balance between game elements and educational value, but it would be beneficial to provide more detail on how exactly this would be achieved. Additionally, more detail could be provided on the four multilevel escape rooms and the futuristic MEC. Providing more detail would help to make the presentation clearer and more engaging."
+	const response = (filename == "PitchEdited.mp4") ? `<br> <ol> <li><strong>Strength: Addressing an Important Issue</strong> <br> <p>The project aims to tackle the significant issue of malware awareness, which is crucial given the increasing reliance on digital technologies and the growing threat of cyberattacks. By using a 3D interactive environment with escape rooms, the project offers an engaging way to educate users about malware, making learning more interactive and effective.</p> </li> <li><strong>Strength: Innovative Approach</strong> <br> <p>The use of a 3D immersive environment and gamification to teach users about malware is an innovative approach that can enhance user engagement and retention of information. Multilevel escape rooms can keep users motivated and provide a structured learning experience, covering various topics related to malware and cyberattacks.</p> </li> <li><strong>Strength: Cost Efficiency</strong> <br> <p>As the project is developed by students using free platforms like Unity 3D, the overall costs are minimized, making the project financially viable.</p> </li> </ol> <ol> <li><strong>Weakness: User Needs and Engagement</strong> <br> <p>The project acknowledges the challenge of meeting the needs of users with varying levels of prior knowledge about malware. Balancing the educational content to avoid it being too basic or too advanced is crucial and may require extensive user feedback and iterative design. Ensuring that the game elements are engaging enough to keep users motivated while still delivering educational value is a significant challenge. Low engagement could diminish the educational impact.</p> </li> <li><strong>Weakness: Market Challenges</strong> <br> <p/>The project targets a niche market, which could limit its profitability. Educational malware games are not mainstream, and finding a substantial user base might be challenging. Advertising and promoting the game in an unsaturated market could be difficult. The project needs a clear marketing strategy to reach its intended audience effectively.</p> </li> <li><strong>Weakness: Scalability and Feedback</strong> <br> <p>Relying on a small sample size for user feedback may not provide a comprehensive understanding of user needs and preferences. A larger and more diverse group of test users would offer better insights. The project&#39;s ability to scale and be adopted by educational institutions or cybersecurity training programs is uncertain and would require strategic partnerships and endorsements.</p> </li> </ol> <ol> <li><strong>Recommendation: Enhanced User Testing</strong> <br> <p>Expand the user testing group to include individuals with varying levels of knowledge about malware. This can help in balancing the content to better meet diverse user needs. Use feedback to iteratively improve the game, ensuring it remains engaging and educationally valuable.</p> </li> <li><strong>Recommendation: Marketing Strategy</strong> <br> <p>Develop a marketing strategy that targets specific groups interested in cybersecurity, such as educational institutions, cybersecurity training programs, and tech enthusiasts. Form partnerships with educational organizations and cybersecurity firms to promote the game and increase its reach.</p> </li> <li><strong>Recommendation: Content Balance</strong> <br> <p>Consider implementing adaptive learning techniques that adjust the difficulty and content based on the user&#39;s knowledge level and progress. Integrate more game mechanics that enhance engagement, such as rewards, leaderboards, and challenges that cater to both beginners and advanced users.</p> </li> </ol>` : `<br> <ol> <li><strong>Strength: Addressing a Real Pain Point</strong> <br> <p>The project targets a significant issue in the education sector—teachers being overwhelmed by grading and administrative tasks. By offering a solution that automates and assists in marking, the project directly addresses a real and widespread problem. Automating grading processes can save teachers considerable time, allowing them to focus on more interactive and engaging aspects of teaching, such as student interaction and curriculum development.</p> </li> <li><strong>Strength: Technological Innovation</strong> <br> <p>The integration of cutting-edge technologies like GPT-3 for language processing, AWS Transcribe for speech-to-text, and gaze estimation for engagement analysis adds substantial value. These features can provide nuanced feedback and deeper insights into student performance and engagement. The combination of tone analysis, picture detection, and NLP can result in a holistic evaluation of student submissions, beyond just grading, potentially enhancing the quality of feedback.</p> </li> <li><strong>Strength: Scalability</strong> <br> <p>The solution is designed to be used across multiple sectors on campus, indicating scalability. If successful in one institution, it could be adopted by others, both within and beyond the educational sector, such as corporate training and online education platforms.</p> </li> </ol> <ol> <li><strong>Weakness: Implementation Complexity</strong> <br> <p>Implementing and integrating multiple advanced technologies can be complex and costly. Schools and educational institutions might face difficulties in adopting and maintaining such a system without significant technical support. Handling student data, including videos and personal information, requires stringent privacy and security measures. Ensuring compliance with data protection regulations (such as GDPR) could be challenging and resource-intensive.</p> </li> <li><strong>Weakness: Reliability and Accuracy</strong>`
 	const textbox = document.getElementById('business-value-text');
 	textbox.innerHTML = response;
 

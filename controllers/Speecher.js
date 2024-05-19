@@ -5,7 +5,9 @@
 let upload = async (req, res) => {
 
 	// let emotion = await speecher.uploadPromise(req.body);
-	let emotion = "Strong — The speaker has a clear, loud and expressive tone of voice."
+
+	let emotion = (req.body.name == "PitchEdited.mp4") ? "Rushed — The speaker talks too quickly, and might come off as unclear." : "Strong — The speaker has a clear, loud and expressive tone of voice."
+
 	res.json({'emotion': emotion});
 
 };

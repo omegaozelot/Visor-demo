@@ -427,3 +427,25 @@ object.spinner {
 	width: 400px;
 	margin: 0 auto;
 }
+
+li > b, li > strong {
+	color: black !important;
+	font-weight: 800 !important;
+}
+
+ul.smallul > li {
+	font-size: 15px !important;
+}
+
+h4 {
+	color: black !important;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-weight: 600 !important;
+	font-size: 18px !important;
+	letter-spacing: 1px !important;
+}
+
+ol > li > strong {
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-weight: 600 !important;
+}
